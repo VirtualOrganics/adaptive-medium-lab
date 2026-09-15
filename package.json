@@ -1,0 +1,1 @@
+{"name":"adaptive-medium-local-lab","version":"0.2.0","type":"module","private":true,"scripts":{"start":"node serve.js","test":"node --test tests.js","experiments":"node experiments.js","experiments:geometry":"node geometry-experiments.js"}}

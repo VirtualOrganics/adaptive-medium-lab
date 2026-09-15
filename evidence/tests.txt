@@ -1,0 +1,27 @@
+✔ uniform and shallow AM do not ignite (41.578542ms)
+✔ opposing unorganized arrivals retain their loading with zero resultant (7.482625ms)
+✔ a supply packet cannot load the receiver before its transit time (3.569959ms)
+✔ compression without export returns locally with an explicit destination (16.300916ms)
+✔ ordinary wear follows the declared lifetime and returns its content (15.278667ms)
+✔ transport alone preserves speed and amount without numerical erosion (9.422625ms)
+✔ balanced head-on cohorts return both contents at the meeting (7.374708ms)
+✔ unequal head-on contact preserves the unmatched organized amount (6.275584ms)
+✔ separating cohorts born together are not a head-on collision (2.92225ms)
+✔ open edges retain escaped content in the budget (9.334958ms)
+✔ wake content is transferred into the moving carrier, never erased (21.816209ms)
+✔ local conversion records actual supplying locations and closes all content accounts (22.120125ms)
+✔ finite compute budget pauses rather than deleting cohorts (2.512209ms)
+✔ opposing unorganized arrivals interact in the dip before any receiver search (3.033167ms)
+✔ release-feedback signals cannot act before their physical transit delay (35.385291ms)
+✔ without export the release-feedback sequence has no downstream trigger (12.707958ms)
+✔ current local geometry can recruit across a different axis after signal arrival (0.643917ms)
+✔ equal strongest cliffs share release without selecting a grid index (2.112041ms)
+✔ distributed recruitment shares one signal budget and keeps diagonal transit delay (0.592666ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 273.703333

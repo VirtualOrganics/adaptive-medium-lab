@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Adaptive Medium · Local Lab</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div>
+        <span class="eyebrow">LOCAL RESEARCH BUILD · 02</span>
+        <h1>Adaptive Medium</h1>
+        <p>A small conversion region. A mechanism to establish.</p>
+      </div>
+      <div class="status">
+        <span class="dot"></span> Local only <span class="tag">2D experiments</span>
+      </div>
+    </header>
+    <main>
+      <section class="workspace">
+        <aside>
+          <h2>Experiment</h2>
+          <label for="scenario">Starting state</label
+          ><select id="scenario">
+            <option value="dip">Tiny asymmetric dip</option>
+            <option value="symmetric">Tiny symmetric dip</option>
+            <option value="converging">Opposing unorganized arrivals</option>
+            <option value="collision">Balanced head-on cohorts</option>
+            <option value="wear">One cohort · basic wear</option>
+            <option value="wake-pair">Two cohorts · wake interaction</option>
+            <option value="quiet">Uniform AM</option>
+            <option value="shallow">Shallow variation</option>
+            <option value="noisy">Tiny dip in mild noise</option>
+          </select>
+          <p id="scenarioNote" class="note"></p>
+          <label for="closure">Conversion hypothesis</label
+          ><select id="closure">
+            <option value="release-dense" selected>Release feedback · dense AM</option>
+            <option value="release-rising">Release feedback · rising face</option>
+            <option value="limited">Limited withdrawal</option>
+            <option value="aggregate">Aggregate withdrawal</option>
+            <option value="stress">AM response trigger</option>
+          </select>
+          <p class="note">
+            All five rules are hypotheses. Release feedback advances birth sites; its pressure law
+            and the returning circulation remain unestablished.
+          </p>
+          <label for="recruitment">Upstream recruitment</label>
+          <select id="recruitment">
+            <option value="strongest" selected>Strongest current local cliff</option>
+            <option value="distributed">Share across eligible local cliffs</option>
+            <option value="inherited">Inherited direction · baseline</option>
+          </select>
+          <p class="note">
+            Applies to release feedback. Geometry can turn recruitment; sustained circulation
+            remains unestablished.
+          </p>
+          <details id="settings" open>
+            <summary>Simulation settings</summary>
+            <div class="divider"></div>
+            <label class="switch"
+              ><input type="checkbox" id="export" checked /> Allow cohort release</label
+            ><label class="switch"
+              ><input type="checkbox" id="steer" checked /> AM-mediated steering</label
+            ><label class="switch"
+              ><input type="checkbox" id="wake" checked /> Carve and carry wake content</label
+            >
+            <label for="speed">Cohort bulk speed <output id="speedValue">1.0 × c</output></label
+            ><input id="speed" type="range" min="0.4" max="2" step="0.1" value="1" />
+            <label for="wear">Basic wear <output id="wearValue">0.012 / time</output></label
+            ><input id="wear" type="range" min="0" max="0.04" step="0.002" value="0.012" />
+            <button id="apply" class="secondary full">Restart with these settings</button>
+            <p class="note">
+              Settings apply on restart. Intrinsic AM speed c = 1. Cohort bulk speed is a
+              hypothesis.
+            </p>
+            <details>
+              <summary>Model and units</summary>
+              <label for="steeringLaw">Steering comparison</label
+              ><select id="steeringLaw">
+                <option value="continuous">Continuous AM gradient</option>
+                <option value="original" selected>Original forward-probe law</option>
+              </select>
+              <p>
+                Free AM content has baseline 1 per cell. Held compression and in-transit supply are
+                separate content accounts. AM response is signed deformation, not extra material.
+                Gold marks organized content; cyan marks unorganized transit.
+              </p>
+              <p>
+                Eight incoming directions remain distinct. Release feedback propagates an explicitly
+                hypothesized stress signal to recorded suppliers at c; it is not extra material.
+                Exit directions are local maxima of a sampled resistance/stress rule; their number
+                is not fixed at two. The square grid can bias them.
+              </p>
+              <p>
+                The damped wave response and local healing exchange are hypotheses. A speed constant
+                does not establish invariant kickback. Open edges account for escaped content.
+              </p>
+            </details>
+          </details>
+        </aside>
+        <div class="stage">
+          <div class="toolbar">
+            <div class="transport">
+              <button id="play" class="primary">Run</button
+              ><button id="step" title="Advance one numerical step">Step</button
+              ><button id="advance">+ 5 time</button
+              ><button id="reset" title="Restart current settings">Reset</button>
+            </div>
+            <div class="view-controls">
+              <label for="view" class="sr-only">Field view</label
+              ><select id="view">
+                <option value="content">Free AM content</option>
+                <option value="response">Adaptive response</option>
+                <option value="compression">Held compression</option>
+                <option value="withdrawal">Donor withdrawal · cumulative</option>
+                <option value="birth">Cohort births · cumulative</option>
+                <option value="return">Local returns · cumulative</option></select
+              ><label><input type="checkbox" id="paths" checked /> Paths</label
+              ><label><input type="checkbox" id="zoom" />Local zoom</label>
+            </div>
+          </div>
+          <p class="model-status">Experimental model · returning circulation not established</p>
+          <div class="canvas-wrap">
+            <canvas id="field" aria-label="Adaptive Medium simulation field"></canvas>
+            <div class="canvas-label">
+              <span id="clock">t = 0.0</span><span id="performance">Paused</span>
+            </div>
+            <div id="notice" role="status"></div>
+          </div>
+          <div class="legend">
+            <span><i class="free"></i> dense baseline</span
+            ><span><i class="dip"></i> depletion</span><span><i class="held"></i> compression</span
+            ><span><i class="cohort"></i> organized cohort</span
+            ><span><i class="supply"></i> unorganized transit</span
+            ><span><i class="signal"></i> release response</span
+            ><span class="legend-note">Trails show recorded history.</span>
+          </div>
+          <div class="metrics">
+            <div><span>Organized content</span><strong id="mass">0.000</strong></div>
+            <div><span>Carried wake content</span><strong id="carried">0.000</strong></div>
+            <div><span>Held / in transit</span><strong id="held">0.000 / 0.000</strong></div>
+            <div><span>Returned by collision</span><strong id="collisions">0.000</strong></div>
+            <div><span>Content budget error</span><strong id="budget">0.0e+0</strong></div>
+          </div>
+          <div class="charts">
+            <section>
+              <h3>Where conversion actually happens</h3>
+              <canvas id="birthPlot" aria-label="Birth locations versus time"></canvas>
+              <p>
+                Distance of each receiving-side birth from the original dip. A growing radius alone
+                is not kickback.
+              </p>
+            </section>
+            <section>
+              <h3>Content account over time</h3>
+              <canvas id="accountPlot" aria-label="Content inventory plot"></canvas>
+              <p>
+                <b class="gold">Organized</b> · <b class="cyan">in transit</b> ·
+                <b class="white">held</b> · <b class="violet">carried</b>. Free AM and escaped
+                content complete the account.
+              </p>
+            </section>
+          </div>
+          <div class="download">
+            <span id="readout">Hover over the field to inspect a cell.</span
+            ><button id="download">Save this experiment</button>
+          </div>
+        </div>
+      </section>
+      <section class="findings">
+        <div>
+          <span class="eyebrow">MEASURED, NOT INFERRED FROM THE PICTURE</span>
+          <h2>What this build establishes</h2>
+          <p id="evidenceIntro">Loading the recorded experiments…</p>
+        </div>
+        <div class="finding-grid">
+          <article>
+            <span class="verdict observed">Observed locally</span>
+            <h3>Compression and return</h3>
+            <p>
+              Prepared opposing unorganized arrivals load compression with zero net direction.
+              Isolated wear and head-on contact return the corresponding content.
+            </p>
+          </article>
+          <article>
+            <span class="verdict failed">Conditional advance</span>
+            <h3>Upstream conversion</h3>
+            <p>
+              Release feedback with dense receiving resistance advances axial birth sites at 0.2 c
+              in the tested runs. This relies on an explicit signal law. The unrestricted aggregate
+              rule fails its export-disabled control.
+            </p>
+          </article>
+          <article>
+            <span class="verdict open">Not established</span>
+            <h3>Two returning branches</h3>
+            <p>
+              Some cohorts born together bend back into contact in the geometry comparison. A
+              sustained two-branch circulation from one tiny conversion region has not been
+              demonstrated.
+            </p>
+          </article>
+        </div>
+        <details class="results">
+          <summary>Recorded experiments and measurements</summary>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Experiment</th>
+                  <th>Birth sites</th>
+                  <th>Birth extent</th>
+                  <th>Exported</th>
+                  <th>Collision return</th>
+                </tr>
+              </thead>
+              <tbody id="results"></tbody>
+            </table>
+          </div>
+        </details>
+        <p class="links">
+          <a href="evidence/geometry/returning-pair.svg" target="_blank">Tracked returning pair</a
+          ><a href="https://github.com/VirtualOrganics/adaptive-medium-lab/blob/main/GEOMETRY-FINDINGS.md" target="_blank">Latest findings</a
+          ><a href="evidence/geometry/results.json" download>Geometry measurements</a
+          ><a href="evidence/summary.svg" target="_blank">Baseline evidence figure</a
+          ><a href="https://github.com/VirtualOrganics/adaptive-medium-lab/blob/main/REPORT.md" target="_blank">Assessment and model choices</a
+          ><a href="evidence/results.json" download>Baseline measurements</a
+          ><a href="https://github.com/VirtualOrganics/adaptive-medium-lab/blob/main/README.md#reproduce-the-experiments" target="_blank">Reproduce the experiments</a>
+        </p>
+      </section>
+    </main>
+    <footer>
+      New implementation · independent of the original app · no prescribed loops or boundary
+      wrapping
+    </footer>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
